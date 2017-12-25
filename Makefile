@@ -85,6 +85,9 @@ CFLAGS += -Wno-deprecated-declarations
 LDLIBS += -lcrypto
 endif
 
+lzfse/build/bin/lzfse.a:
+	@pushd lzfse &> /dev/null; make; popd &> /dev/null
+
 .c.o:
 	$(CC) -o $@ $(CFLAGS) -c $<
 .s.o:
@@ -92,11 +95,12 @@ endif
 
 all: img4
 
-img4: $(OBJECTS)
+img4: $(OBJECTS) lzfse/build/bin/lzfse.a
 	$(LD) -o $@ $(LDFLAGS) $^ $(LDLIBS)
 
 clean:
 	-$(RM) $(OBJECTS) $(CCOBJECTS)
+	@pushd lzfse &> /dev/null; make clean; popd &> /dev/null
 
 distclean: clean
 	-$(RM) img4
