@@ -83,6 +83,8 @@ OBJECTS += $(CCOBJECTS)
 else
 CFLAGS += -Wno-deprecated-declarations
 LDLIBS += -lcrypto
+CFLAGS += -I/usr/local/opt/openssl/include
+LDFLAGS += -L/usr/local/opt/openssl/lib
 endif
 
 lzfse/build/bin/lzfse.a:
