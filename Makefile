@@ -88,7 +88,7 @@ LDFLAGS += -L/usr/local/opt/openssl/lib
 endif
 
 lzfse/build/bin/liblzfse.a:
-	@pushd lzfse &> /dev/null; make; popd &> /dev/null
+	$(MAKE) -C lzfse
 
 .c.o:
 	$(CC) -o $@ $(CFLAGS) -c $<
@@ -102,7 +102,7 @@ img4: $(OBJECTS) lzfse/build/bin/liblzfse.a
 
 clean:
 	-$(RM) $(OBJECTS) $(CCOBJECTS)
-	@pushd lzfse &> /dev/null; make clean; popd &> /dev/null
+	$(MAKE) -C lzfse clean
 
 distclean: clean
 	-$(RM) img4
